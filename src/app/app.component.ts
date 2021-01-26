@@ -93,7 +93,13 @@ export class AppComponent implements OnInit, AfterViewInit {
         }
       })
     });
-    this.dataSource=sortData
+    if(sortData){
+      this.dataSource = new MatTableDataSource(sortData);
+      // this.dataSource.filter = filterValue.trim().toLowerCase();
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    } 
   }
   applyFilter(filterValue) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
